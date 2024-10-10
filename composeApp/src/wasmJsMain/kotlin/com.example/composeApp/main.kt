@@ -2,6 +2,7 @@ package com.example.composeApp
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
+import com.viento.allegrissimo.app.App
 import kotlinx.browser.document
 
 @OptIn(ExperimentalComposeUiApi::class)

@@ -1,4 +1,4 @@
-package com.example.composeApp
+package com.viento.allegrissimo.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
