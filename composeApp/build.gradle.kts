@@ -53,6 +53,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,6 +62,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.androidx.compose.lifecycle.viewmodel)
+            implementation(libs.koin.core)
+            implementation("com.mohamedrejeb.calf:calf-permissions:0.5.5")
             implementation(project(":audioPlayer"))
         }
         desktopMain.dependencies {
@@ -70,7 +74,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.example"
+    namespace = "com.viento.allegrissimo"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -78,7 +82,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.example"
+        applicationId = "com.viento.allegrissimo"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -108,11 +112,11 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.example.composeApp.MainKt"
+        mainClass = "com.viento.allegrissimo.composeApp.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.example"
+            packageName = "com.viento.allegrissimo"
             packageVersion = "1.0.0"
         }
     }
