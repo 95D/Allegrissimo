@@ -65,6 +65,7 @@ kotlin {
             implementation(libs.androidx.compose.lifecycle.viewmodel)
             implementation(libs.koin.core)
             implementation("com.mohamedrejeb.calf:calf-permissions:0.5.5")
+            implementation("com.ditchoom:buffer:1.4.2")
             implementation(project(":audioPlayer"))
         }
         desktopMain.dependencies {
