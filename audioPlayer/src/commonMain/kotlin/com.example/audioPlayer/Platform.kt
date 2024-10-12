@@ -1,9 +1,11 @@
 package com.example.audioPlayer
 
-interface Platform {
-    val name: String
-}
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
-expect fun getPlatform(): Platform
+expect class Platform() {
+    val name: String
+    fun printLogD(tag: String, message: String)
+}
 
 

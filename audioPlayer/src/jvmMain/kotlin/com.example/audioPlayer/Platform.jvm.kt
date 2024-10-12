@@ -1,7 +1,10 @@
 package com.example.audioPlayer
 
-class JVMPlatform: Platform {
-    override val name: String = "Java ${System.getProperty("java.version")}"
-}
+actual class Platform actual constructor() {
+    actual val name: String
+        get() = "Java ${System.getProperty("java.version")}"
 
-actual fun getPlatform(): Platform = JVMPlatform()
+    actual fun printLogD(tag: String, message: String) {
+        println("$tag: $message")
+    }
+}

@@ -1,9 +1,13 @@
 package com.example.audioPlayer
 
 import android.os.Build
+import android.util.Log
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${Build.VERSION.SDK_INT}"
+actual class Platform actual constructor() {
+    actual val name: String
+        get() = "Android ${Build.VERSION.SDK_INT}"
+
+    actual fun printLogD(tag: String, message: String) {
+        Log.d(tag, message)
+    }
 }
-
-actual fun getPlatform(): Platform = AndroidPlatform()

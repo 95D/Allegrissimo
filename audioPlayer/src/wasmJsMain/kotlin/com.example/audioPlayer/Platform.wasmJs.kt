@@ -1,7 +1,10 @@
 package com.example.audioPlayer
 
-class WasmPlatform: Platform {
-    override val name: String = "Web with Kotlin/Wasm"
-}
+actual class Platform actual constructor() {
+    actual val name: String
+        get() = "Web with Kotlin/Wasm"
 
-actual fun getPlatform(): Platform = WasmPlatform()
+    actual fun printLogD(tag: String, message: String) {
+        println("$tag: $message")
+    }
+}
