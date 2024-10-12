@@ -8,3 +8,9 @@ actual class AudioPlayer {
     actual fun release() {
     }
 }
+
+actual class AudioPlayerFactory {
+    actual fun create(): AudioPlayer {
+        TODO("Not yet implemented")
+    }
+}
