@@ -14,12 +14,15 @@ actual class AudioPlayer(private val context: Context) {
     }
 
     actual fun playSound(uri: String) {
+        if (mediaPlayer.isPlaying) return
+        mediaPlayer.prepare()
         mediaPlayer.setMediaItem(MediaItem.fromUri(uri))
+        mediaPlayer.repeatMode = Player.REPEAT_MODE_ONE
         mediaPlayer.play()
     }
 
     actual fun release() {
-        mediaPlayer.release()
+        mediaPlayer.stop()
     }
 }
 
