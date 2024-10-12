@@ -39,6 +39,11 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
+
+        }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.media3.exoplayer)
         }
     }
 }
