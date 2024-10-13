@@ -62,6 +62,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
             implementation(libs.androidx.compose.lifecycle.viewmodel)
             implementation(libs.koin.core)
             implementation("com.mohamedrejeb.calf:calf-permissions:0.5.5")
