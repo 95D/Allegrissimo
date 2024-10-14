@@ -1,9 +1,5 @@
 package com.viento.allegrissimo.app
 
-import allegrissimo.composeapp.generated.resources.Res
-import allegrissimo.composeapp.generated.resources.hello_compose
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,15 +13,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mohamedrejeb.calf.permissions.ExperimentalPermissionsApi
-import com.viento.allegrissimo.tempo.ui.TempoScreen
+import com.viento.allegrissimo.tempo.ui.TempoRoute
 import com.viento.allegrissimo.ui.theme.AppTheme
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 const val TEMPO_SCREEN = "tempo_screen"
@@ -50,7 +43,7 @@ fun App() {
                     startDestination = TEMPO_SCREEN
                 ) {
                     composable(TEMPO_SCREEN) {
-                        TempoScreen()
+                        TempoRoute()
                     }
                 }
             }
@@ -68,22 +61,9 @@ fun AppBar() {
         TopAppBar(
             title = { Text("Allegrissimo") },
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                containerColor = Color.Unspecified,
                 titleContentColor = MaterialTheme.colorScheme.primary,
             ),
         )
-        Box(
-            modifier = Modifier.background(MaterialTheme.colorScheme.surfaceContainer)
-        ) {
-
-            Text(
-                text = stringResource(Res.string.hello_compose),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            )
-        }
     }
 }
