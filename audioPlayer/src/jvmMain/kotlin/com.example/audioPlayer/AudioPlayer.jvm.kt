@@ -10,7 +10,7 @@ actual class AudioPlayer {
 }
 
 actual class AudioPlayerFactory {
-    actual fun create(): AudioPlayer {
+    actual fun create(onEndAudio: () -> Unit): AudioPlayer {
         TODO("Not yet implemented")
     }
 }

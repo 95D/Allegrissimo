@@ -6,5 +6,5 @@ expect class AudioPlayer {
 }
 
 expect class AudioPlayerFactory() {
-    fun create(): AudioPlayer
+    fun create(onEndAudio: () -> Unit): AudioPlayer
 }
