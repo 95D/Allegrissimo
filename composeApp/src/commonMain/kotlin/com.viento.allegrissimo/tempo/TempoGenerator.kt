@@ -3,39 +3,44 @@ package com.viento.allegrissimo.tempo
 import com.ditchoom.buffer.ByteOrder
 import com.ditchoom.buffer.PlatformBuffer
 import com.ditchoom.buffer.wrap
+import com.viento.allegrissimo.tempo.model.Note
 import kotlin.math.PI
 import kotlin.math.sin
 
-class TempoGenerator(private val waveConfiguration: WaveConfiguration = WaveConfiguration()) {
+class TempoGenerator(
+    private val waveConfiguration: WaveConfiguration = WaveConfiguration()
+) {
     private fun generateBeepForm(
+        bpm: Int,
         duration: Float
     ): ByteArray {
         val totalBytes = waveConfiguration.getTotalBytes(duration)
         val dataArray = ByteArray(totalBytes)
-        val beepSampleSize = totalBytes / 4
+        val beepSampleSize = waveConfiguration.getTotalBytes(
+            getDurationByBeat(bpm = bpm, noteLength = Note.THIRTY_SECOND.length * 0.5f)
+        )
         // Generate audio data (e.g., a sine wave)
         for (i in 0 until beepSampleSize step 2) {
             val wave = sin(i * 2 * PI * 440.0 / waveConfiguration.sampleRate)
             val sample = (wave * Short.MAX_VALUE).toInt()
             dataArray[i] = (sample and 0xFF).toByte()
-            dataArray[i + 1] = (sample shr  Byte.SIZE_BITS).toByte()
+            dataArray[i + 1] = (sample shr Byte.SIZE_BITS).toByte()
         }
         return dataArray
     }
 
-    fun generateWaveBuffer(bpm: Int, tone: Int, beat: Int): Pair<ByteArray, ByteArray> {
-        val durationForBeat = SECONDS_60.toFloat()/bpm.toFloat() * tone
-        val waveFormArray = generateBeepForm(durationForBeat)
-        val dataArray = ByteArray(waveFormArray.size * beat)
-        val dataBuffer = PlatformBuffer.wrap(dataArray, ByteOrder.LITTLE_ENDIAN)
-        // Generate audio data (e.g., a sine wave)
-        for (i in 0 until beat) {
-            dataBuffer.writeBytes(waveFormArray)
-        }
-
-        val header = createWaveHeader((durationForBeat * beat))
-        return header to dataArray
+    fun generateWaveBuffer(
+        bpm: Int,
+        noteLength: Float
+    ): Pair<ByteArray, ByteArray> {
+        val durationForBeat = getDurationByBeat(bpm, noteLength)
+        val waveFormArray = generateBeepForm(bpm, durationForBeat)
+        val header = createWaveHeader((durationForBeat))
+        return header to waveFormArray
     }
+
+    private fun getDurationByBeat(bpm: Int, noteLength: Float): Float =
+        SECONDS_60.toFloat() / bpm.toFloat() * noteLength
 
     private fun createWaveHeader(
         duration: Float
@@ -58,7 +63,7 @@ class TempoGenerator(private val waveConfiguration: WaveConfiguration = WaveConf
         val byteRate =
             waveConfiguration.sampleRate * waveConfiguration.numChannels * bytesPerSample
         header.writeInt(byteRate)
-        val blockAlign = waveConfiguration.numChannels * bytesPerSample /  Byte.SIZE_BITS
+        val blockAlign = waveConfiguration.numChannels * bytesPerSample / Byte.SIZE_BITS
         header.writeShort(blockAlign.toShort())
         header.writeShort(waveConfiguration.sampleSize.toShort())
         header.writeString("data")
