@@ -13,20 +13,20 @@ enum class Note(
     val length: Float get() = 4f / divided
 
     fun up(): Note = when (this) {
-        THIRTY_SECOND -> SIXTEENTH
-        SIXTEENTH -> EIGHTH
-        EIGHTH -> QUARTER
-        QUARTER -> HALF
-        HALF -> WHOLE
-        WHOLE -> WHOLE
-    }
-
-    fun down(): Note = when (this) {
         THIRTY_SECOND -> THIRTY_SECOND
         SIXTEENTH -> THIRTY_SECOND
         EIGHTH -> SIXTEENTH
         QUARTER -> EIGHTH
         HALF -> QUARTER
         WHOLE -> HALF
+    }
+
+    fun down(): Note = when (this) {
+        THIRTY_SECOND -> SIXTEENTH
+        SIXTEENTH -> EIGHTH
+        EIGHTH -> QUARTER
+        QUARTER -> HALF
+        HALF -> WHOLE
+        WHOLE -> WHOLE
     }
 }
