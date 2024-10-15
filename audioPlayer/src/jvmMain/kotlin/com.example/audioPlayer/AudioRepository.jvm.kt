@@ -1,11 +1,27 @@
 package com.example.audioPlayer
 
+import java.io.File
+import java.net.URI
+
 actual class AudioRepository {
-    actual fun saveAudioFile(fileName: String, bytes: ByteArray) {
-        TODO("Not yet implemented")
+    private fun getAudioDirectory(): File =
+        File("/Users/user/desktop/", DIR_AUDIO)
+
+    private fun getAudioFile(fileName: String): File {
+        val audioDirectory = getAudioDirectory()
+        val audioFile = File(audioDirectory.absolutePath, fileName)
+        return audioFile
     }
 
-    actual fun getFileUri(fileName: String): String {
-        TODO("Not yet implemented")
+    actual fun saveAudioFile(fileName: String, bytes: ByteArray) {
+        val audioFile = getAudioFile(fileName)
+        audioFile.writeBytes(bytes)
+    }
+
+    actual fun getFileUri(fileName: String): String =
+        URI.create(getAudioFile(fileName).absolutePath).toString()
+
+    companion object {
+        private const val DIR_AUDIO = "Audio"
     }
 }
