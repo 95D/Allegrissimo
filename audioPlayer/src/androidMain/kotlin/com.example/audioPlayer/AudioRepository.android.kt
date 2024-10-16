@@ -18,6 +18,6 @@ actual class AudioRepository {
         audioFile.writeBytes(bytes)
     }
 
-    actual fun getFileUri(fileName: String): String =
+    actual fun getFilePath(fileName: String): String =
         Uri.fromFile(getAudioFile(fileName)).toString()
 }

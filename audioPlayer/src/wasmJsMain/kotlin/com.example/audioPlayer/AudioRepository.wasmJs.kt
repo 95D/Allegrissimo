@@ -5,7 +5,7 @@ actual class AudioRepository {
         TODO("Not yet implemented")
     }
 
-    actual fun getFileUri(fileName: String): String {
+    actual fun getFilePath(fileName: String): String {
         TODO("Not yet implemented")
     }
 }

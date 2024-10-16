@@ -35,7 +35,7 @@ actual class AudioRepository {
         }
     }
 
-    actual fun getFileUri(fileName: String): String =
+    actual fun getFilePath(fileName: String): String =
         getAudioFilePath(fileName)
 
     companion object {

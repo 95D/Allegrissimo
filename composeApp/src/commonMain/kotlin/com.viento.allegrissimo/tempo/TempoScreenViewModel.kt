@@ -47,7 +47,7 @@ class TempoScreenViewModel : ViewModel() {
         val (header, data) = TempoGenerator()
             .generateWaveBuffer(bpm = bpm, noteLength = noteLength)
         AudioRepository().saveAudioFile(fileName, header + data)
-        val uri = AudioRepository().getFileUri(fileName)
+        val uri = AudioRepository().getFilePath(fileName)
         withContext(Dispatchers.Main) {
             audioPlayer.playSound(uri)
         }
